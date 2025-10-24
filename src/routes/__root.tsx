@@ -12,7 +12,7 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <div className="h-screen w-screen relative">
+    <div className="h-[100svh] w-screen relative">
       <Outlet />
       <div className="absolute w-fit bottom-5 right-5 z-50">
         <GlobalMenu />
