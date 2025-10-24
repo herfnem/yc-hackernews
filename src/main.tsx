@@ -9,6 +9,7 @@ import { routeTree } from "./routeTree.gen";
 
 import "@/styles/index.css";
 import { registerSW } from "virtual:pwa-register";
+import { ThemeProvider } from "./components/theme-provider";
 registerSW({ immediate: true });
 
 // Create a new router instance
@@ -38,7 +39,9 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <TanStackQueryProvider.Provider>
-        <RouterProvider router={router} />
+        <ThemeProvider defaultTheme="dark">
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </TanStackQueryProvider.Provider>
     </StrictMode>,
   );

@@ -44,7 +44,7 @@ export const NewsView = () => {
     <SplitView
       defaultLeftPct={48}
       left={
-        <div className="h-screen overflow-auto p-4">
+        <div className="h-[99vh] overflow-auto p-4">
           {isLoading ? (
             <NewsListSkeleton rows={10} />
           ) : (

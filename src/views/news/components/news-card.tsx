@@ -158,11 +158,11 @@ export const NewsCard: FC<NewsCardProps> = ({
   return (
     <article
       className={cn(
-        "group relative overflow-hidden rounded-2xl border border-neutral-200/60 bg-white/80 p-5 shadow-sm ring-1 ring-black/5 transition-all hover:shadow-md hover:ring-black/10 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-neutral-800/60 dark:bg-neutral-900/60 dark:hover:ring-white/10",
+        "group relative overflow-hidden rounded-2xl border border-neutral-200/60 bg-white/80 p-2 shadow-sm ring-1 ring-black/5 transition-all hover:shadow-md hover:ring-black/10 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-neutral-800/60 dark:bg-neutral-900/60 dark:hover:ring-white/10",
         className,
       )}
     >
-      <div className="mb-3 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+      <div className="mb-2 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
         {domain ? (
           <img
             src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
@@ -183,21 +183,21 @@ export const NewsCard: FC<NewsCardProps> = ({
         </time>
       </div>
 
-      <h3 className="text-lg font-semibold leading-snug text-neutral-900 transition-colors group-hover:text-neutral-700 dark:text-neutral-100 dark:group-hover:text-neutral-300">
+      <p className="text-sm font-semibold leading-snug text-neutral-900 transition-colors group-hover:text-neutral-700 dark:text-neutral-100 dark:group-hover:text-neutral-300">
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-start gap-2"
         >
-          <span className="underline-offset-[6px] group-hover:no-underline">
+          <span className="underline-offset-[6px] text-sm group-hover:no-underline">
             {storyDetail.title}
           </span>
           <Icon.ArrowTopRight className="mt-0.5 h-5 w-5 opacity-60 group-hover:opacity-90" />
         </a>
-      </h3>
+      </p>
 
-      <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-neutral-600 dark:text-neutral-300">
+      <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-neutral-600 dark:text-neutral-300">
         <div className=" flex items-center gap-2  max-md:hidden">
           {storyDetail.url && (
             <button
@@ -211,31 +211,20 @@ export const NewsCard: FC<NewsCardProps> = ({
         </div>
 
         <span className="inline-flex items-center gap-1 rounded-full bg-neutral-100 px-2 py-1 dark:bg-neutral-800/60">
-          <Icon.Upvote className="h-4 w-4" />
-          <span className="tabular-nums">{storyDetail.score}</span>
+          <Icon.Upvote className="size-3" />
+          <span className="tabular-nums text-sm">{storyDetail.score}</span>
           <span className="sr-only">points</span>
         </span>
 
         <span className="inline-flex items-center gap-1 rounded-full bg-neutral-100 px-2 py-1 dark:bg-neutral-800/60">
-          <Icon.Comment className="h-4 w-4" />
-          <span className="tabular-nums">{commentsCount}</span>
+          <Icon.Comment className="size-3" />
+          <span className="tabular-nums text-sm">{commentsCount}</span>
           <span className="sr-only">comments</span>
         </span>
 
         <span className="inline-flex items-center gap-1">
-          <Icon.User className="h-4 w-4 opacity-70" />
-          <span className="font-medium">{storyDetail.by}</span>
-        </span>
-
-        <span className="inline-flex items-center gap-1">
-          <Icon.Clock className="h-4 w-4 opacity-70" />
-          <time
-            className="tabular-nums"
-            dateTime={new Date(storyDetail.time * 1000).toISOString()}
-            title={new Date(storyDetail.time * 1000).toLocaleString()}
-          >
-            {timeAgo(storyDetail.time)}
-          </time>
+          <Icon.User className="size-3 opacity-70" />
+          <span className="font-medium text-sm">{storyDetail.by}</span>
         </span>
       </div>
 

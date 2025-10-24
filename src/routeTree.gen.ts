@@ -9,55 +9,58 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as YcHackernewsRouteImport } from './routes/yc-hackernews'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as YcHackernewsIndexRouteImport } from './routes/yc-hackernews/index'
+import { Route as YcHackernewsNewsRouteImport } from './routes/yc-hackernews/news'
 
-const YcHackernewsRoute = YcHackernewsRouteImport.update({
-  id: '/yc-hackernews',
-  path: '/yc-hackernews',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const YcHackernewsIndexRoute = YcHackernewsIndexRouteImport.update({
+  id: '/yc-hackernews/',
+  path: '/yc-hackernews/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YcHackernewsNewsRoute = YcHackernewsNewsRouteImport.update({
+  id: '/yc-hackernews/news',
+  path: '/yc-hackernews/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/yc-hackernews': typeof YcHackernewsRoute
+  '/yc-hackernews/news': typeof YcHackernewsNewsRoute
+  '/yc-hackernews': typeof YcHackernewsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/yc-hackernews': typeof YcHackernewsRoute
+  '/yc-hackernews/news': typeof YcHackernewsNewsRoute
+  '/yc-hackernews': typeof YcHackernewsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/yc-hackernews': typeof YcHackernewsRoute
+  '/yc-hackernews/news': typeof YcHackernewsNewsRoute
+  '/yc-hackernews/': typeof YcHackernewsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/yc-hackernews'
+  fullPaths: '/' | '/yc-hackernews/news' | '/yc-hackernews'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/yc-hackernews'
-  id: '__root__' | '/' | '/yc-hackernews'
+  to: '/' | '/yc-hackernews/news' | '/yc-hackernews'
+  id: '__root__' | '/' | '/yc-hackernews/news' | '/yc-hackernews/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  YcHackernewsRoute: typeof YcHackernewsRoute
+  YcHackernewsNewsRoute: typeof YcHackernewsNewsRoute
+  YcHackernewsIndexRoute: typeof YcHackernewsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/yc-hackernews': {
-      id: '/yc-hackernews'
-      path: '/yc-hackernews'
-      fullPath: '/yc-hackernews'
-      preLoaderRoute: typeof YcHackernewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/yc-hackernews/': {
+      id: '/yc-hackernews/'
+      path: '/yc-hackernews'
+      fullPath: '/yc-hackernews'
+      preLoaderRoute: typeof YcHackernewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/yc-hackernews/news': {
+      id: '/yc-hackernews/news'
+      path: '/yc-hackernews/news'
+      fullPath: '/yc-hackernews/news'
+      preLoaderRoute: typeof YcHackernewsNewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  YcHackernewsRoute: YcHackernewsRoute,
+  YcHackernewsNewsRoute: YcHackernewsNewsRoute,
+  YcHackernewsIndexRoute: YcHackernewsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
